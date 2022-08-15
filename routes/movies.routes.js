@@ -3,17 +3,7 @@ const Celebrity = require("../models/Celebrity.model");
 const Movie = require("../models/Movie.model");
 
 router.get("/movies/create", (req, res) => {
-    Celebrity.find()
-    .then((celebrityFromDB) => {
-      const movieData = {
-        celebrityArr: celebrityFromDB
-      }
-      res.render("movies/new-movie", movieData);
-    })
-    .catch((error) => {
-      console.log("Error getting movies from DB", error);
-      next(error);
-    });
+    res.render("movies/new-movie");
 })
 router.post("/movies/create", (req, res) => {
 
@@ -61,20 +51,6 @@ router.post("/movies/create", (req, res) => {
       .catch((error) => {
         console.log("Error deleting movie  from DB", error);
         next(error);
-      });
-  })
-  router.post("/movies/create", (req, res) => {
-
-    const { title, genre, plot, cast } = req.body;
-    Movie.create({ title, genre, plot, cast })
-      .then(() => {
-        res.redirect("/movies")
-  
-      })
-      .catch((error) => {
-        console.log("Error creating", error);
-        next(error);
-  
       });
   })
   
